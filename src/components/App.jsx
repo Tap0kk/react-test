@@ -1,50 +1,26 @@
-import { useEffect, useState } from 'react';
-import Description from './Description/Description';
-import Options from './Options/Options';
-import Feedback from './Feedback/Feedback';
-import Notification from './Notification/Notification';
+import { Layout } from './Layout/Layout';
+import { AppBar } from './AppBar/AppBar';
+import { TaskForm } from './TaskForm/TaskForm';
+import { TaskList } from './TaskList/TaskList';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchTasks } from '../redux/operations';
 
-const App = () => {
-  const [feedback, setFeedback] = useState(
-    JSON.parse(localStorage.getItem('feedback')) || {
-      good: 0,
-      neutral: 0,
-      bad: 0,
-    }
-  );
+export const App = () => {
+  const dispatch = useDispatch();
+  const { items, isLoading, error } = useSelector(state => state.tasks);
 
   useEffect(() => {
-    localStorage.setItem('feedback', JSON.stringify(feedback)), [feedback];
-  });
-
-  const feedBackUpdate = option => {
-    setFeedback(prev => ({ ...prev, [option]: prev[option] + 1 }));
-  };
-
-  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
-
-  const resetFeedback = () => {
-    setFeedback({ good: 0, neutral: 0, bad: 0 });
-  };
-
-  const positiveFeedback = totalFeedback
-    ? Math.round((feedback.good / totalFeedback) * 100)
-    : 0;
-
+    dispatch(fetchTasks());
+  }, [dispatch]);
   return (
     <div>
-      <Description />
-      <Options leaveFeedBack={feedBackUpdate} reset={resetFeedback} />
-      {totalFeedback > 0 ? (
-        <Feedback
-          stats={feedback}
-          total={totalFeedback}
-          positive={positiveFeedback}
-        />
-      ) : (
-        <Notification message={'No feedback given'} />
-      )}
+      <AppBar />
+      <TaskForm />
+      {isLoading && !error && <b>Request in progress...</b>}
+      <TaskList />
     </div>
   );
 };
+
 export default App;

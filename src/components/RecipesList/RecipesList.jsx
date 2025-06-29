@@ -1,4 +1,4 @@
-import css from './RecipesList.module.css';
+import s from './RecipesList.module.css';
 
 export default function RecipesList( ) {
   /*{console.log('Recipes: ', recipes);
@@ -10,7 +10,7 @@ export default function RecipesList( ) {
   }
   }*/
   return (
-    <div>Recipes list</div>
+    <div className={s.recipeList}>Recipes list</div>
     /*{  <ul className={css.list}>
       {recipes.map(recipe => (
         <li key={recipe.id} className={css.item}>

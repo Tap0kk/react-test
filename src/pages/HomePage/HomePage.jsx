@@ -73,8 +73,10 @@ const HomePage = () => {
       <section className={s.recipesection}>
         <div className={s.recipesHeader}>
           <h2 className={s.recipesTitle}>Recepies</h2>
+          <div className={s.filterContainer}>
           <span className={s.recipesCount}>12 recipes</span>
           <Filters onChange={handleFiltersChange} />
+          </div>
         </div>
         {/* {error && <div className={s.error}>{error}</div>}
         {showNoRecipes && (

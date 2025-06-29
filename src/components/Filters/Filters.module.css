@@ -1,0 +1,46 @@
+.inputContaner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.input {
+  border: 1px solid rgb(217, 217, 217);
+  border-radius: 8px;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  padding: 12px;
+  color: rgb(159, 159, 159);
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.inputBtn {
+  width: 100%;
+  border-radius: 8px;
+  background-color: rgb(155, 108, 67);
+  padding: 12px 16px;
+  color: rgb(255, 255, 255);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .inputContaner {
+  flex-direction: row;
+}
+
+.input {
+  max-width: 471px;
+  width: 100%;
+}
+
+.inputBtn {
+  max-width: 57px;
+  width: 100%;
+}
+}

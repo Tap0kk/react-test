@@ -70,7 +70,7 @@ const HomePage = () => {
           <SearchBox onSearch={handleSearch} />
         </div>
       </section>
-      <section className={clsx(s.recipesection, s.container)}>
+      <section className={clsx(s.recipesSection, s.container)}>
         <div className={s.recipesHeader}>
           <h2 className={s.recipesTitle}>Recepies</h2>
           <div className={s.filterContainer}>

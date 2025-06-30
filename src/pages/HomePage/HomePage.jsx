@@ -1,42 +1,19 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useCallback } from 'react';
+import { useRecipes } from '../../hooks/useRecipes';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import Filters from '../../components/Filters/Filters';
-// import RecipesList from '../../components/RecipesList/RecipesList';
+import RecipesList from '../../components/RecipesList/RecipesList';
 import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn';
-// import { fetchRecipes } from '../../../redux/recipes/operations';
-// import {
-//   selectRecipes,
-//   selectTotal,
-//   selectIsLoading,
-//   selectError,
-// } from '../../../redux/recipes/selectors';
 import s from './HomePage.module.css';
 import clsx from 'clsx';
 
-const RECIPES_PER_PAGE = 12;
-
 const HomePage = () => {
-  // const dispatch = useDispatch();
-  // const recipes = useSelector(selectRecipes);
-  // const total = useSelector(selectTotal);
-  // const isLoading = useSelector(selectIsLoading);
-  // const error = useSelector(selectError);
-
   const [searchQuery, setSearchQuery] = useState('');
   const [filters, setFilters] = useState({ category: '', ingredient: '' });
   const [page, setPage] = useState(1);
+  const { recipes, isLoading, error } = useRecipes();
 
-  // useEffect(() => {
-  //   dispatch(
-  //     fetchRecipes({
-  //       page,
-  //       search: searchQuery,
-  //       category: filters.category,
-  //       ingredient: filters.ingredient,
-  //     })
-  //   );
-  // }, [dispatch, page, searchQuery, filters]);
+  if (error) return <>Error: {error}</>;
 
   const handleSearch = useCallback(query => {
     setSearchQuery(query);
@@ -52,12 +29,6 @@ const HomePage = () => {
     setPage(prev => prev + 1);
   };
 
-  // const handlePageChange = (newPage) => {
-  //   setPage(newPage);
-  // };
-
-  // const showNoRecipes = !isLoading && recipes.length === 0;
-
   return (
     <main className={s.main}>
       <section className={clsx(s.hero, s.container)}>
@@ -70,19 +41,13 @@ const HomePage = () => {
           <SearchBox onSearch={handleSearch} />
         </div>
       </section>
-      <section className={s.recipesection}>
-        <div className={s.recipesHeader}>
-          <h2 className={s.recipesTitle}>Recepies</h2>
+      <section className={clsx(s.recipesSection, s.container)}>
+        <h2 className={s.recipesTitle}>Recipes</h2>
+        <div className={s.filterContainer}>
           <span className={s.recipesCount}>12 recipes</span>
           <Filters onChange={handleFiltersChange} />
         </div>
-        {/* {error && <div className={s.error}>{error}</div>}
-        {showNoRecipes && (
-          <div className={s.noRecipes}>
-            No recipes found for your query.
-          </div>
-        )} */}
-        {/* <RecipesList /> */}
+        {isLoading ? <p>Loading...</p> : <RecipesList recipes={recipes} />}
 
         <LoadMoreBtn onClick={handleLoadMore} />
       </section>

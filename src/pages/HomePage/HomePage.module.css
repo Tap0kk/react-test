@@ -22,8 +22,6 @@
 
 .heroContent {
   padding: 128px 16px 96px;
-  /* padding-top: 128px;
-  padding-bottom: 96px; */
 }
 
 .heroTitle {
@@ -37,8 +35,8 @@
 }
 
 .recipesSection {
-  padding-top: 48px;
-  padding-bottom: 48px;
+  padding-top: 36px;
+  padding-bottom: 36px;
 }
 
 .recipesTitle {
@@ -59,7 +57,8 @@
   line-height: 22px;
   text-align: left;
 }
-.filtersContainer {
+
+.filterContainer {
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
@@ -72,5 +71,52 @@
 
   .heroTitle {
     font-size: 40px;
+  }
+  .recipesSection {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .hero {
+    background-image: url('../../assets/img/tab_hero_1x-min.png');
+  }
+
+  @media screen and (min-resolution: 192dpi),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 2dppx) {
+    .hero {
+      background-image: url('../../assets/img/tab_hero_2x-min.png');
+    }
+  }
+  .container {
+    max-width: 768px;
+    padding: 0 32px;
+  }
+
+  .heroContent {
+    padding: 128px 16px;
+  }
+
+  .heroTitle {
+    font-size: 48px;
+    line-height: 110%;
+  }
+
+  .recipesSection {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .recipesTitle {
+    font-size: 40px;
+    line-height: 49px;
+  }
+
+  .filterContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
   }
 }
